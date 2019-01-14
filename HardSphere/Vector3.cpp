@@ -1,7 +1,7 @@
 #include"Vector3.hpp"
 
 
-double vector3::operator*(Vector3 v1)
+double Vector3::operator*(Vector3 v1)
 {
 	return(x*v1.x+y*v1.y+v1.z*z);
 }
