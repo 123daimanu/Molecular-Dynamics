@@ -1,49 +1,37 @@
 #ifndef ATOM_HPP
 #define ATOM_HPP
 
-#include "maths/Vector3.hpp"
-
-
-struct propAtom{
-
-  float tInit;
-  float tCol;
-  Vector3 pos;
-  Vector3 vel;
-  int collisionWith;
-
-};
+#include "../maths/Vector3.hpp"
 
 
 class atom{
+  public:
+    float tI;
+    float* tC;
+    Vector3 pos;
+    Vector3 vel;
+    int* collisionWith;
 
-  struct propAtom atom1;
+    atom(){}
 
-  atom(float tInit, float tCol, Vector3 pos, Vector3 vel, int collisionWith):atom1()
-  {
-      atom1.tInit=tInit;
-      atom1.tCol=tCol;
-      atom1.pos = pos;
-      atom1.vel = vel;
-      atom1.collisionWith = collisionWith;
-  }
+    ~atom(){};
 
-  ~atom{};
-
-    void setTinit(double tinit);
-    double getTinit();
-
-    void setTcol(double tCol);
-    double getTcol();
-
-    void setPos(Vector3 pos);
-    Vector3 getPos();
+    void setTinit(float tinit);
+    float getTinit();
+/*
+    void setTcol(float tCol,int index);
+    float* getTcol();
+*/
+    void setPosition(Vector3 pos);
+    Vector3 getPosition();
 
     void setVelocity(Vector3 velocity);
     Vector3 getVelocity();
 
-    void setCollisionWith(int);
-    int getCollisionWith();
-}
+    void setCollisionWith(int index);
+    int* getCollisionWith();
+
+    int getMinTc();
+};
 
 #endif

@@ -40,6 +40,6 @@ Vector3 Vector3::operator*(double s)
 
 double dot(Vector3 A, Vector3 B)
 {
-  return A.x*B.x+A.y*B.y+A.z*B.z
+  return A.x*B.x+A.y*B.y+A.z*B.z;
 
 }
