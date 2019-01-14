@@ -9,9 +9,9 @@ class initialize{
     int number;
     atom *systemAtoms;
 
-    initialize();
-    ~initialize();
-  //  void Initial();
+    initialize(){}
+    ~initialize(){};
+    void Initial();
     void setnumber(int num);
 
     //void velocityInitial()

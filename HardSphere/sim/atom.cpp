@@ -26,6 +26,11 @@ void atom::setTinit(float tI)
 {
   tI=tI;
 }
+
+Vector3 atom::getPosition()
+{
+  return pos;
+}
 /*
 void atom::setTcol(float tC)
 {
