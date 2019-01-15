@@ -9,7 +9,10 @@ class initialize{
     int number;
     atom *systemAtoms;
 
-    initialize(){}
+    initialize(int num):number(num)
+	{
+		atom *systemAtoms = new atom[number];
+	}
     ~initialize(){};
     void Initial();
     void setnumber(int num);
