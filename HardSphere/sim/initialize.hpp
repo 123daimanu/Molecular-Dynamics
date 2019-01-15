@@ -3,24 +3,21 @@
 
 #include "../maths/Vector3.hpp"
 #include "atom.hpp"
+
+
 class initialize{
 
   public:
     int number;
-    atom *systemAtoms;
+    atom systemAtoms[1000];
 
     initialize(int num):number(num)
 	{
-		atom *systemAtoms = new atom[number];
 	}
     ~initialize(){};
     void Initial();
-    void setnumber(int num);
-
-    //void velocityInitial()
-    //void timeInitialize()
-    //void timeCollisionInitialize()
-    //void collisionWithInitalize()
+    void timeCollisionInitialize(atom a);
+    void collisionWithInitalize(atom a);
 
 
 };

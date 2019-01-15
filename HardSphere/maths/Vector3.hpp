@@ -24,10 +24,13 @@ class Vector3
 	Vector3	operator-(Vector3 v);
 
 	Vector3 operator*(double s);
+	void operator=(const Vector3 &v);
 
-  double dot(Vector3 A, Vector3 B);
+  double dot (Vector3 A, Vector3 B);
 
   double square();
+	Vector3 V12(Vector3 V1, Vector3 V2);
+	Vector3 unit(Vector3 V);
 
 
 

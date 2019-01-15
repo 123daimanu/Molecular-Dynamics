@@ -7,10 +7,10 @@
 class atom{
   public:
     float tI;
-    float* tC;
+    float tC[1000];
     Vector3 pos;
     Vector3 vel;
-    int* collisionWith;
+    int collisionWith[1000];
 
     atom(){}
 
@@ -18,20 +18,18 @@ class atom{
 
     void setTinit(float tinit);
     float getTinit();
-/*
-    void setTcol(float tCol,int index);
-    float* getTcol();
-*/
+
     void setPosition(Vector3 pos);
     Vector3 getPosition();
 
     void setVelocity(Vector3 velocity);
     Vector3 getVelocity();
 
-    void setCollisionWith(int index);
-    int* getCollisionWith();
+    void setCollisionWith(int index, float time);
+    float getCollisionTime( int index);
 
-    int getMinTc();
+    int getMinTcIndex();
+
 };
 
 #endif
