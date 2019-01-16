@@ -5,16 +5,6 @@
 #include "initialize.hpp"
 #include "../maths/Vector3.hpp"
 
-
-
-
-
-
-
-
-
-
-
 bool simulation::collisionFlag(atom a, atom b)
 {
   Vector3 v12 = V12(a.getVelocity(),b.getVelocity());
@@ -51,5 +41,10 @@ void velocityUpdate(atom *a, atom *b)
   *b.setVelocity(*b.getVelocity()+deltaV);
 
 }
-void positionUpdate(atom *a);
+void positionUpdate(atom *a)
+{
+  Vector3 posNew = *a.getPosition()+(*a).getVelocity()*(simTime-(*a).getTinit());
+  *a.setPosition(posNew);
+
+}
 void collisionTimeUpdate();
