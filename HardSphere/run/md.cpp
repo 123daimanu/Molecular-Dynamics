@@ -1,9 +1,9 @@
 #include<iostream>
 
 
-#include "../sim/initialize.hpp"
-#include "../sim/atom.hpp"
-#include "../maths/Vector3.hpp"
+#include "../src/sim/initialize.hpp"
+#include "../src/sim/atom.hpp"
+#include "../src/maths/Vector3.hpp"
 using namespace std;
 
 
