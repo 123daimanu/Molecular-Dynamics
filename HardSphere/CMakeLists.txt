@@ -1,117 +1,79 @@
-cmake_minimum_required(VERSION 3.0)
-project(HardSphere_project)
+# Top level cmake script for HardSphere.
+project(HardSphere CXX)
+cmake_minimum_required(VERSION 2.8.11)
 
-###############################################################################
-## file globbing ##############################################################
-###############################################################################
+#list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 
-# these instructions search the directory tree when cmake is
-# invoked and put all files that match the pattern in the variables
-# `sources` and `data`
-
-file(GLOB_RECURSE sources
-    /src/sim/*.cpp
-    /src/sim/*.h
-    src/maths/*.h
-    src/maths/*.cpp
-    )
-
-file(GLOB_RECURSE sources_test
-    run/*.cpp
-    )
-
-#file(GLOB_RECURSE data resources/*)
-
-
-# you can use set(sources src/main.cpp) etc if you don't want to
-# use globing to find files automatically
-
-###############################################################################
-## target definitions #########################################################
-###############################################################################
-
-# add the data to the target, so it becomes visible in some IDE
-
-add_executable(HardSphere ${sources} )
-
-# just for example add some compiler flags
-target_compile_options(HardSphere PUBLIC -std=c++1y  -Wall -c -Wfloat-conversion)
-
-# this lets me include files relative to the root src dir with a <> pair
-target_include_directories(HardSphere PUBLIC
-      src/sim
-      src/maths
-      )
-
-# this copies all resource files in the build directory
-# we need this, because we want to work with paths relative to the executable
-
-#file(COPY ${data} DESTINATION resources)
-
-###############################################################################
-## dependencies ###############################################################
-###############################################################################
-
-# this defines the variables Boost_LIBRARIES that contain all library names
-# that we need to link to
-#find_package(Boost 1.36.0 COMPONENTS filesystem system REQUIRED)
-
-#target_link_libraries(HardSphere PUBLIC
-#  ${Boost_LIBRARIES}
-#  # here you can add any library dependencies
-#)
-
-###############################################################################
-## testing ####################################################################
-###############################################################################
-
-# this is for our testing framework
-# we don't add REQUIRED because it's just for testing
-find_package(GTest)
-
-if(GTEST_FOUND)
-  add_executable(unit_tests ${sources_test} ${sources})
-
-  # we add this define to prevent collision with the main
-  # this might be better solved by not adding the source with the main to the
-  # testing target
-  target_compile_definitions(unit_tests PUBLIC UNIT_TESTS)
-
-  # this allows us to use our executable as a link library
-  # therefore we can inherit all compiler options and library dependencies
-  set_target_properties(HardSphere PROPERTIES ENABLE_EXPORTS on)
-
-  target_link_libraries(unit_tests PUBLIC
-    ${GTEST_BOTH_LIBRARIES}
-    HardSphere
-  )
-
-  target_include_directories(unit_tests PUBLIC
-    ${GTEST_INCLUDE_DIRS} # doesn't do anything on Linux
-  )
+if (NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release")
 endif()
 
-###############################################################################
-## packaging ##################################################################
-###############################################################################
+IF(WIN32)
+   ADD_DEFINITIONS(/D_CRT_SECURE_NO_WARNINGS)
+ENDIF(WIN32)
 
-# all install commands get the same destination. this allows us to use paths
-# relative to the executable.
-install(TARGETS HardSphere DESTINATION HardSphere_destination)
-# this is basically a repeat of the file copy instruction that copies the
-# resources in the build directory, but here we tell cmake that we want it
-# in the package
-install(DIRECTORY resources DESTINATION HardSphere_destination)
 
-# now comes everything we need, to create a package
-# there are a lot more variables you can set, and some
-# you need to set for some package types, but we want to
-# be minimal here
-set(CPACK_PACKAGE_NAME "HardSphere")
-set(CPACK_PACKAGE_VERSION "1.0.0")
+include(CheckCXXCompilerFlag)
+include(CheckIncludeFileCXX)
+include(CheckCXXSymbolExists)
 
-# we don't want to split our program up into several things
-set(CPACK_MONOLITHIC_INSTALL 1)
+if ( CMAKE_COMPILER_IS_GNUCXX )
+    add_definitions("-Wall")
+endif ( CMAKE_COMPILER_IS_GNUCXX )
+if ( MSVC )
+    add_definitions("/W3 /DNOMINMAX")
+endif ( MSVC )
 
-# This must be last
-include(CPack)
+
+
+# ---------- Setup output Directories -------------------------
+SET (CMAKE_LIBRARY_OUTPUT_DIRECTORY
+  ${PROJECT_BINARY_DIR}/lib
+  CACHE PATH
+  "Single directory for all shared libraries"
+  )
+# --------- Setup the Executable output Directory -------------
+SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY
+  ${PROJECT_BINARY_DIR}/bin
+  CACHE PATH
+  "Single directory for all Executables."
+  )
+# --------- Setup the static library directory -------------
+SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY
+  ${PROJECT_BINARY_DIR}/lib
+  CACHE PATH
+  "Single directory for all static libraries."
+  )
+
+#Add executables for build
+set (run)
+
+set(SOURCE
+src/maths/Vector3.cpp
+src/sim/initialize.cpp
+src/sim/atom.cpp
+src/sim/simulation.cpp
+)
+
+
+
+add_executable(run run/md.cpp)
+target_link_libraries(run)
+
+#INSTALL(TARGETS run)
+
+message( STATUS)
+message( STATUS "========== HardSphere Build Information ==========")
+message( STATUS "CMAKE_SYSTEM ............... = ${CMAKE_SYSTEM}")
+message( STATUS "==============================================")
+message( STATUS "CMAKE_BUILD_TYPE ........... = ${CMAKE_BUILD_TYPE}")
+message( STATUS "CMAKE_INSTALL_PREFIX ....... = ${CMAKE_INSTALL_PREFIX}")
+message( STATUS "Build as SINGLE_PRECISION .. = ${SINGLE_PRECISION}")
+message( STATUS "CMAKE_CXX_COMPILER ......... = ${CMAKE_CXX_COMPILER}")
+message( STATUS )
+message( STATUS "To build and install HardSphere, enter \"make\" and \"make install\"")
+message( STATUS )
+
+# build a CPack driven installer package
+
+include (CPack)
