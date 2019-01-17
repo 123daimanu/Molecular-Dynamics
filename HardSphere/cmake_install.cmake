@@ -1,4 +1,4 @@
-# Install script for directory: /Users/manu_hem/Desktop/PERSONAL/PROG/Molecular-Dynamics/HardSphere
+# Install script for directory: /home/hbhattar/PERSONAL/HardSphere/HardSphere
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,23 +27,34 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/HardSphere_destination" TYPE EXECUTABLE FILES "/Users/manu_hem/Desktop/PERSONAL/PROG/Molecular-Dynamics/HardSphere/HardSphere")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/HardSphere_destination/HardSphere" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/HardSphere_destination/HardSphere")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/HardSphere_destination/HardSphere"
+         RPATH "")
+  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/HardSphere_destination" TYPE EXECUTABLE FILES "/home/hbhattar/PERSONAL/HardSphere/HardSphere/HardSphere")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/HardSphere_destination/HardSphere" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/HardSphere_destination/HardSphere")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Library/Developer/CommandLineTools/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/HardSphere_destination/HardSphere")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/HardSphere_destination/HardSphere")
     endif()
   endif()
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/HardSphere_destination" TYPE DIRECTORY FILES "/Users/manu_hem/Desktop/PERSONAL/PROG/Molecular-Dynamics/HardSphere/resources")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/HardSphere_destination" TYPE DIRECTORY FILES "/home/hbhattar/PERSONAL/HardSphere/HardSphere/resources")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -54,5 +65,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/manu_hem/Desktop/PERSONAL/PROG/Molecular-Dynamics/HardSphere/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/hbhattar/PERSONAL/HardSphere/HardSphere/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
