@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/manu_hem/Desktop/PERSONAL/PROG/Molecular-Dynamics/HardSphere/src/maths/Vector3.cpp
+cmath
+-
+Vector3.hpp
+/Users/manu_hem/Desktop/PERSONAL/PROG/Molecular-Dynamics/HardSphere/src/maths/Vector3.hpp
+
+/Users/manu_hem/Desktop/PERSONAL/PROG/Molecular-Dynamics/HardSphere/src/maths/Vector3.hpp
+

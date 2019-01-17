@@ -7,7 +7,7 @@
 using namespace std;
 
 
-int main()
+int main(int argc, char **argv)
 {
   int number_of_atoms=100;
   initialize system(number_of_atoms);
