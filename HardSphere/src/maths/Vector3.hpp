@@ -33,6 +33,8 @@ class Vector3
 	Vector3 unit();
 	friend ostream & operator <<(ostream &output, const Vector3 &V);
 
+	Vector3 Floor();
+
 
 
 

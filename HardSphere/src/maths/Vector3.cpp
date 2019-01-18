@@ -66,3 +66,8 @@ ostream &operator <<(ostream &output, const Vector3 &V)
 	return output;
 
 }
+
+Vector3 Vector3::Floor()
+{
+	return Vector3(floor(this->x),floor(this->y),floor(this->z));
+}

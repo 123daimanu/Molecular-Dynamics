@@ -15,11 +15,14 @@ public:
   simulation():initialize(){
     minColtime = new float[number];
     minColtimeIndex = new int[number];
-  };
+  }
   ~simulation(){};
 
-  void velocityUpdate(atom *a, atom *b);
-  void positionUpdate(atom *a);
+  void velocityUpdate(atom a, atom b);
+  void positionUpdate(atom a, float time);
   void getCollision();
+  void update();
+  void periodicBoundary(atom A);
+
 };
 #endif

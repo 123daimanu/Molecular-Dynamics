@@ -42,6 +42,7 @@ void atom::setCollisionWith(int index, float time){
   tC[index] = time;
   collisionWith[index] = 1;
 }
+
 float atom::getCollisionTime( int index){
 
   return tC[index];

@@ -16,7 +16,7 @@ class initialize{
     ~initialize(){};
     void Initial();
     void setSystem(int num, float radius);
-    void CollisionInitialize(atom a);
+    void CollisionTimeUpdate(atom a);
     void collisionWithInitalize(atom a);
     bool collisionFlag(atom a, atom b);
     float collisionTime(atom a, atom b);

@@ -42,14 +42,14 @@ void initialize::Initial()
         }
       }
     }
-    for(int i =0; i<number; i++) CollisionInitialize(systemAtoms[i]);
+    for(int i =0; i<number; i++) CollisionTimeUpdate(systemAtoms[i]);
 
 
   }
 
 
 
-  void initialize::CollisionInitialize(atom A)
+  void initialize::CollisionTimeUpdate(atom A)
   {
     for(int i=0;i<number;i++)
     {
@@ -57,12 +57,12 @@ void initialize::Initial()
       if (colFlag){
         float coltime = collisionTime(A, systemAtoms[i]);
         if(coltime > 0){
-          A.tC[i] = coltime;
+          A.tC[i] = coltime + A.tI;
           A.collisionWith[i] = true;
         }
       }
       else{
-        A.tC[i] = -1;
+        A.tC[i] = 0 + A.tI;
         A.collisionWith[i] = false;
       }
 
