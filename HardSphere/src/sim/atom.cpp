@@ -1,7 +1,10 @@
 #include<iostream>
 #include<cmath>
+#include<limits>
 #include "atom.hpp"
 #include "../maths/Vector3.hpp"
+
+#define INF std::numeric_limits<float>::infinity();
 
 
 
@@ -45,19 +48,18 @@ float atom::getCollisionTime( int index){
 
 }
 
-int atom::getMinTcIndex(){
-  float time = 10000000;
+int atom::getMinTimeIndex(){
+  float time = INF;
   int index = 0;
-  int i = 0;
-  int count = 0;
-  while(count < number)
+  int i=0;
+  while(i < number)
   {
     if(tC[i]>=0 && tC[i]<time)
     {
       time = tC[i];
       index = i;
     }
-    count++;
+    i++;
   }
   return index;
 }
@@ -67,6 +69,11 @@ void atom::setnumberOfAtoms(int n)
 {
   number = n;
   tC = new float[n];
-  collisionWith = new int[n];
+  collisionWith = new bool[n];
 
+}
+
+void atom::setAtomTag(int tag)
+{
+  atomTag = tag;
 }
