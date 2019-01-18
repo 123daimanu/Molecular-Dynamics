@@ -9,15 +9,17 @@ class initialize{
 
   public:
     int number;
-    atom systemAtoms[1000];
+    atom *systemAtoms;
+    float sigma;
 
-    initialize(int num):number(num)
-	{
-	}
+    initialize():number(0){};
     ~initialize(){};
     void Initial();
+    void setSystem(int num);
     void timeCollisionInitialize(atom a);
     void collisionWithInitalize(atom a);
+    bool collisionFlag(atom a, atom b);
+    float collisionTime(atom a, atom b);
 
 
 };

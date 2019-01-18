@@ -48,15 +48,21 @@ Vector3 Vector3::operator*(double s)
 
 }
 
-double dot(Vector3 A, Vector3 B)
+double Vector3::dot(Vector3 A)
 {
-  return A.x*B.x+A.y*B.y+A.z*B.z;
+  return A.x*this->x + A.y*this->y + A.z*this->z;
+}
+Vector3 Vector3::V12(Vector3 V2)
+{
+	return V2-*this;
+}
+Vector3 Vector3::unit(){
+	return *this/sqrt(this->square());
+}
 
-}
-Vector3 Vector3::V12(Vector3 V1, Vector3 V2)
+ostream &operator <<(ostream &output, const Vector3 &V)
 {
-	return V2-V1;
-}
-Vector3 unit(Vector3 V){
-	return V/sqrt(V.square());
+	output<<"["<<V.x<<", "<<V.y<<", "<<V.z<<"]";
+	return output;
+
 }

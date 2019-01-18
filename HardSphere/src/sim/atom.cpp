@@ -49,13 +49,24 @@ int atom::getMinTcIndex(){
   float time = 10000000;
   int index = 0;
   int i = 0;
-  while(tC[i]!= -999)
+  int count = 0;
+  while(count < number)
   {
     if(tC[i]>=0 && tC[i]<time)
     {
       time = tC[i];
       index = i;
     }
+    count++;
   }
   return index;
+}
+
+
+void atom::setnumberOfAtoms(int n)
+{
+  number = n;
+  tC = new float[n];
+  collisionWith = new int[n];
+
 }

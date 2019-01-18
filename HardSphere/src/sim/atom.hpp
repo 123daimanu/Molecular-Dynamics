@@ -6,11 +6,12 @@
 
 class atom{
   public:
-    float tI;
-    float tC[1000];
-    Vector3 pos;
-    Vector3 vel;
-    int collisionWith[1000];
+    int number; // total number of atom in system
+    float tI; // time at current confugration
+    float *tC; // keeps track of collision time with the atoms
+    Vector3 pos;// velocity at current configuration
+    Vector3 vel; // velocity at current configuration
+    int *collisionWith; // keeps track with index of colliding atom
 
     atom(){}
 
@@ -29,6 +30,8 @@ class atom{
     float getCollisionTime( int index);
 
     int getMinTcIndex();
+
+    void setnumberOfAtoms(int n);
 
 };
 

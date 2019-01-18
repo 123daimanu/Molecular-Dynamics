@@ -2,33 +2,22 @@
 #define SIMULATION_HPP
 
 #include "atom.hpp"
+#include "initialize.hpp"
 
-class simulation
+class simulation: public initialize
 {
 public:
-  float minColtime[1000];
-  int minColtimeIndex[1000];
-  int number;
-  float sigma;
-  float simTime;
+  float *minColtime;
+  int *minColtimeIndex;
+  float simTime = 0.0;
 
-  simulation(int num,float sig):number(num),sigma(sig),simTime(0){}
+  simulation():initialize(){
+    minColtime = new float[number];
+    minColtimeIndex = new int[number];
+  };
   ~simulation(){};
 
-  bool collisionFlag(atom a, atom b);
-  float collisionTime(atom a, atom b);
   void velocityUpdate(atom *a, atom *b);
   void positionUpdate(atom *a);
-  void collisionTimeUpdate();
-    
 };
-
-
-
-
-
-
-
-
-
 #endif

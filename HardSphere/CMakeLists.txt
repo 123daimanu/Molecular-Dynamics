@@ -53,12 +53,12 @@ src/maths/Vector3.cpp
 src/sim/initialize.cpp
 src/sim/atom.cpp
 src/sim/simulation.cpp
+run/md.cpp
 )
 
 
 
-add_executable(run run/md.cpp)
-target_link_libraries(run)
+add_executable(run ${SOURCE})
 
 #INSTALL(TARGETS run)
 

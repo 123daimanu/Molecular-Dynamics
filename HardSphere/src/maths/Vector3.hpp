@@ -1,7 +1,8 @@
 #ifndef VECTOR3_HPP
 #define VECTOR3_HPP
 
-
+#include <iostream>
+using namespace std;
 
 
 class Vector3
@@ -11,7 +12,7 @@ class Vector3
 
 
 
-	Vector3(double xcomp=0,double ycomp=0,double zcomp=0):x(xcomp),y(ycomp),z(zcomp){};
+	Vector3(double xcomp=0,double ycomp=0,double zcomp=0):x(xcomp),y(ycomp),z(zcomp){}
 	~Vector3(){};
 
 
@@ -25,13 +26,12 @@ class Vector3
 
 	Vector3 operator*(double s);
 	void operator=(const Vector3 &v);
-
-  double dot (Vector3 A, Vector3 B);
+  double dot(Vector3 A);
 
   double square();
-	Vector3 V12(Vector3 V1, Vector3 V2);
-	Vector3 unit(Vector3 V);
-
+	Vector3 V12(Vector3 V2);
+	Vector3 unit();
+	friend ostream & operator <<(ostream &output, const Vector3 &V);
 
 
 

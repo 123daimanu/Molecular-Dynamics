@@ -9,15 +9,16 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+
   int number_of_atoms=100;
-  initialize system(number_of_atoms);
+  initialize system;
+  system.setSystem(number_of_atoms);
   system.Initial();
     cout<<"address of system "<<(system.systemAtoms)<<endl;
 
-  for(int i=1;i<=number_of_atoms;i++)
+  for(int i=0;i<number_of_atoms;i++)
   {
-    cout<<"Position of "<< i <<"atom : " << (system.systemAtoms[i]).getVelocity().x<< endl;
+    cout<<"Velocity of "<< i+1 <<"atom : " << (system.systemAtoms[i]).getVelocity()<< endl;
   }
-
 
 }
