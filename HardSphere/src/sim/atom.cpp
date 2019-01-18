@@ -55,7 +55,7 @@ int atom::getMinTimeIndex(){
   int i=0;
   while(i < number)
   {
-    if(tC[i]>=0 && tC[i]<time)
+    if(tC[i]>0 && tC[i]<time)
     {
       time = tC[i];
       index = i;
