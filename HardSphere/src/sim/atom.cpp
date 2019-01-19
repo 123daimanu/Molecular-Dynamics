@@ -32,11 +32,11 @@ void atom::setTinit(float ti)
 
 Vector3 atom::getPosition()
 {
-  return pos;
+  return this->pos;
 }
 Vector3 atom::getVelocity()
 {
-  return vel;
+  return this->vel;
 }
 void atom::setCollisionWith(int index, float time){
   tC[index] = time;

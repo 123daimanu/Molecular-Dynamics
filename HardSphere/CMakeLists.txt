@@ -46,7 +46,7 @@ SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY
   )
 
 #Add executables for build
-set (run)
+set (md)
 
 set(SOURCE
 src/maths/Vector3.cpp
@@ -54,13 +54,14 @@ src/sim/initialize.cpp
 src/sim/atom.cpp
 src/sim/simulation.cpp
 run/md.cpp
+src/sim/run.cpp
 )
 
 
 
-add_executable(run ${SOURCE})
+add_executable(md ${SOURCE})
 
-#INSTALL(TARGETS run)
+#INSTALL(TARGETS md)
 
 message( STATUS)
 message( STATUS "========== HardSphere Build Information ==========")

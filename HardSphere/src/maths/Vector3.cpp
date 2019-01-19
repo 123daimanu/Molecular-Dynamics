@@ -4,7 +4,7 @@
 #include"Vector3.hpp"
 
 
-double Vector3::operator*(Vector3 v1)
+float Vector3::operator*(Vector3 v1)
 {
 	return(x*v1.x+y*v1.y+v1.z*z);
 }
@@ -18,7 +18,7 @@ Vector3 Vector3::operator+(Vector3 v1)
 }
 
 
-Vector3 Vector3::operator/(double s)
+Vector3 Vector3::operator/(float s)
 {
 	return Vector3(this->x/(s),this->y/(s),this->z/(s));
 }
@@ -36,19 +36,19 @@ void Vector3::operator=(const Vector3 &v)
 
 }
 
-double Vector3::square()
+float Vector3::square()
 {
 	return((*this)*(*this));
 
 }
 
-Vector3 Vector3::operator*(double s)
+Vector3 Vector3::operator*(float s)
 {
 	return Vector3(s*this->x,s*this->y,s*this->z);
 
 }
 
-double Vector3::dot(Vector3 A)
+float Vector3::dot(Vector3 A)
 {
   return A.x*this->x + A.y*this->y + A.z*this->z;
 }

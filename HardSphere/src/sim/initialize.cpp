@@ -42,68 +42,84 @@ void initialize::Initial()
         }
       }
     }
-    for(int i =0; i<number; i++) CollisionTimeUpdate(systemAtoms[i]);
+    for(int i =0; i<number; i++) CollisionTimeInitialize(systemAtoms[i]);
 
 
   }
 
-
-
-  void initialize::CollisionTimeUpdate(atom A)
+void initialize::CollisionTimeInitialize(atom A)
+{
+  for(int i=0;i<number;i++)
   {
-    for(int i=0;i<number;i++)
-    {
-      bool colFlag = collisionFlag(A,systemAtoms[i]);
-      if (colFlag){
-        float coltime = collisionTime(A, systemAtoms[i]);
-        if(coltime > 0){
-          A.tC[i] = coltime + A.tI;
-          A.collisionWith[i] = true;
-        }
+    bool colFlag = collisionFlag(A,systemAtoms[i]);
+    if (colFlag){
+      float coltime = collisionTime(A, systemAtoms[i]);
+      if(coltime > 0){
+        A.tC[i] = coltime;
+        A.collisionWith[i] = true;
       }
-      else{
-        A.tC[i] = 0 + A.tI;
-        A.collisionWith[i] = false;
-      }
-
     }
+    else{
+      A.tC[i] = 0;
+      A.collisionWith[i] = false;
+    }
+
   }
 
+}
 
 
-  bool initialize::collisionFlag(atom A, atom B)
+void initialize::CollisionTimeUpdate(atom A)
+{
+  for(int i=0;i<number;i++)
   {
-    Vector3 v12 = A.getVelocity().V12(B.getVelocity());
-    Vector3 r12 = A.getPosition().V12(B.getPosition());
-    float dotprod = r12.dot(v12);
-    if (dotprod<0)
-    {
-      float disc = dotprod*dotprod - v12.square()*(r12.square()-sigma*sigma);
-      if (disc >=0) return true;
+    bool colFlag = collisionFlag(A,systemAtoms[i]);
+    if (colFlag){
+      float coltime = collisionTime(A, systemAtoms[i]);
+      if(coltime > 0){
+        A.tC[i] = coltime + A.tI;
+        A.collisionWith[i] = true;
+      }
     }
-    return false;
+    else{
+      cout<<A.tC[i]<<endl;
+      A.tC[i] = 0 + A.tI;
+      A.collisionWith[i] = false;
+    }
+
   }
+}
+
+
+
+bool initialize::collisionFlag(atom A, atom B)
+{
+  Vector3 v12 = A.getVelocity().V12(B.getVelocity());
+  Vector3 r12 = A.getPosition().V12(B.getPosition());
+  float dotprod = r12.dot(v12);
+  if (dotprod<0)
+  {
+    float disc = dotprod*dotprod - v12.square()*(r12.square()-sigma*sigma);
+    if (disc >=0) return true;
+  }
+  return false;
+}
 
 //returns time between collision of a and b before previous configuration
-  float initialize::collisionTime(atom A, atom B)
-  {
-    Vector3 v12 = A.getVelocity().V12(B.getVelocity());
-    Vector3 r12 = A.getPosition().V12(B.getPosition());
-    float dotprod = r12.dot(v12);
-    float disc = dotprod*dotprod - v12.square()*(r12.square()-sigma*sigma);
-    float deltaT;
-    deltaT = (-dotprod - sqrt(disc))/(v12.square());
-    return deltaT;
+float initialize::collisionTime(atom A, atom B)
+{
+  Vector3 v12 = A.getVelocity().V12(B.getVelocity());
+  Vector3 r12 = A.getPosition().V12(B.getPosition());
+  float dotprod = r12.dot(v12);
+  float disc = dotprod*dotprod - v12.square()*(r12.square()-sigma*sigma);
+  float deltaT;
+  deltaT = (-dotprod - sqrt(disc))/(v12.square());
+  return deltaT;
+}
 
-
-
-  }
-
-
-  void initialize::setSystem(int num,float radius)
-  {
-    number = num;
-    systemAtoms =  new atom[num];
-    sigma = radius;
-
-  }
+void initialize::setSystem(int num,float radius)
+{
+  number = num;
+  systemAtoms =  new atom[num];
+  sigma = radius;
+}

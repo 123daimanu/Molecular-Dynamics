@@ -11,7 +11,7 @@ public:
   int *minColtimeIndex;
   float simTime = 0.0;
   int collisionPair[2]={-1,-1};
-  float collT = -1 ;
+  float collT = 0 ;
   simulation():initialize(){
     minColtime = new float[number];
     minColtimeIndex = new int[number];
@@ -23,6 +23,7 @@ public:
   void getCollision();
   void update();
   void periodicBoundary(atom A);
+  void velocityInCM();
 
 };
 #endif

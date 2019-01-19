@@ -1,5 +1,7 @@
 
 #include<limits>
+#include<iostream>
+#include <cstdlib>
 
 #include "simulation.hpp"
 #include "initialize.hpp"
@@ -24,7 +26,7 @@ void simulation::velocityUpdate(atom a, atom b)
 
 void simulation::positionUpdate(atom a, float time)
 {
-  Vector3 posNew = a.getPosition()+a.getVelocity()* ( time - a.getTinit());
+  Vector3 posNew = a.getPosition() + a.getVelocity() * time;
   a.setPosition(posNew);
 
 }
@@ -61,16 +63,26 @@ void simulation::update()
   simTime = collT;
   int pair1 =  collisionPair[0];
   int pair2 = collisionPair[1];
-
-  for(int i=0; i< number; i++)
+  if (pair1 != -1 and pair2 != -1)
   {
-    positionUpdate(systemAtoms[i],deltaT);
-    systemAtoms[i].tI = simTime;
-    periodicBoundary(systemAtoms[i]);
+    for(int i=0; i< number; i++)
+    {
+      positionUpdate(systemAtoms[i],deltaT);
+      //cout<<"Before: "<<systemAtoms[i].getPosition()<<endl;
+      systemAtoms[i].tI = simTime;
+      periodicBoundary(systemAtoms[i]);
+      //cout<<"After: "<<systemAtoms[i].getPosition()<<endl;
+    }
+    velocityUpdate(systemAtoms[pair1],systemAtoms[pair2]);
+    CollisionTimeUpdate(systemAtoms[pair1]);
+    CollisionTimeUpdate(systemAtoms[pair2]);
+    velocityInCM();
   }
-  velocityUpdate(systemAtoms[pair1],systemAtoms[pair2]);
-  CollisionTimeUpdate(systemAtoms[pair1]);
-  CollisionTimeUpdate(systemAtoms[pair2]);
+  else
+  {
+    std::cerr << "There is no collision between any pair." << '\n';
+    std::exit(1);
+  }
 
 
 
@@ -80,4 +92,18 @@ void simulation::update()
 void simulation::periodicBoundary(atom A)
 {
   A.setPosition(A.getPosition()-A.getPosition().Floor());
+}
+
+void simulation::velocityInCM()
+{
+  Vector3 vcm(0,0,0);
+  for(int i=0;i<number;i++)
+  {
+    vcm = vcm + systemAtoms[i].getVelocity()/number;
+
+  }
+  for(int i=0;i<number;i++)
+  {
+    systemAtoms[i].setVelocity(systemAtoms[i].getVelocity()-vcm);
+  }
 }
