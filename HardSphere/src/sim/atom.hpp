@@ -14,9 +14,7 @@ class atom{
     Vector3 vel; // velocity at current configuration
     bool *collisionWith; // keeps track with index of colliding atom
 
-    atom(){
-      tI = 0;
-    };
+    atom():tI(0){};
 
     ~atom(){
     };

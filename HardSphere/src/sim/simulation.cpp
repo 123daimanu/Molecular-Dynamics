@@ -10,6 +10,13 @@
 
 #define INF std::numeric_limits<float>::infinity();
 
+simulation::simulation():initialize(){
+  minColtime = new float[number];
+  minColtimeIndex = new int[number];
+}
+
+
+
 void simulation::velocityUpdate(atom a, atom b)
 {
   Vector3 v12 = a.getVelocity().V12(b.getVelocity());

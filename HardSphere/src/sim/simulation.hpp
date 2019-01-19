@@ -13,13 +13,8 @@ public:
   int collisionPair[2]={-1,-1};
   float collT = 0 ;
 
-  simulation():initialize(){
-    minColtime = new float[number];
-    minColtimeIndex = new int[number];
-  };
-
-  ~simulation(){
-  };
+  simulation():initialize(){};
+  ~simulation(){};
 
   void velocityUpdate(atom a, atom b);
   void positionUpdate(atom a, float time);
