@@ -12,11 +12,14 @@ public:
   float simTime = 0.0;
   int collisionPair[2]={-1,-1};
   float collT = 0 ;
+
   simulation():initialize(){
     minColtime = new float[number];
     minColtimeIndex = new int[number];
-  }
-  ~simulation(){};
+  };
+
+  ~simulation(){
+  };
 
   void velocityUpdate(atom a, atom b);
   void positionUpdate(atom a, float time);

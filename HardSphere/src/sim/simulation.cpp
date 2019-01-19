@@ -68,10 +68,9 @@ void simulation::update()
     for(int i=0; i< number; i++)
     {
       positionUpdate(systemAtoms[i],deltaT);
-      //cout<<"Before: "<<systemAtoms[i].getPosition()<<endl;
+
       systemAtoms[i].tI = simTime;
       periodicBoundary(systemAtoms[i]);
-      //cout<<"After: "<<systemAtoms[i].getPosition()<<endl;
     }
     velocityUpdate(systemAtoms[pair1],systemAtoms[pair2]);
     CollisionTimeUpdate(systemAtoms[pair1]);

@@ -18,10 +18,5 @@ public:
   ~run(){};
   void setparams(float packing, int iter,int num);
   void runSimulation();
-
-
-
 };
-
-
 #endif

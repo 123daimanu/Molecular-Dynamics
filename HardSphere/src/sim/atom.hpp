@@ -16,9 +16,10 @@ class atom{
 
     atom(){
       tI = 0;
-    }
+    };
 
-    ~atom(){};
+    ~atom(){
+    };
 
     void setTinit(float tinit);
     float getTinit();

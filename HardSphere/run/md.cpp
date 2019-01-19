@@ -12,11 +12,13 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
-  int number_of_atoms=2;
+  int number_of_atoms=5;
   float packingFraction =0.2;
   int number_of_iteration = 2;
 
   run hardSphere;
   hardSphere.setparams(packingFraction, number_of_iteration, number_of_atoms);
   hardSphere.runSimulation();
+
+  return 0;
 }

@@ -82,8 +82,7 @@ void initialize::CollisionTimeUpdate(atom A)
       }
     }
     else{
-      cout<<A.tC[i]<<endl;
-      A.tC[i] = 0 + A.tI;
+      A.tC[i] = A.tI;
       A.collisionWith[i] = false;
     }
 

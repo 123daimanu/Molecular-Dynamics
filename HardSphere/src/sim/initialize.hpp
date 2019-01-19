@@ -13,7 +13,8 @@ class initialize{
     float sigma;
 
     initialize():number(0){};
-    ~initialize(){};
+    ~initialize(){
+    };
     void Initial();
     void setSystem(int num, float radius);
     void CollisionTimeUpdate(atom a);
