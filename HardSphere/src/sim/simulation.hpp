@@ -13,7 +13,7 @@ public:
   int collisionPair[2]={-1,-1};
   float collT = 0 ;
 
-  simulation():initialize(){};
+  simulation(){};
   ~simulation(){};
 
   void velocityUpdate(atom a, atom b);
