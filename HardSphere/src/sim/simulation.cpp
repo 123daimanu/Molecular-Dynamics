@@ -17,7 +17,7 @@ simulation::simulation():initialize(){
 
 
 
-void simulation::velocityUpdate(atom a, atom b)
+void simulation::velocityUpdate(atom &a, atom &b)
 {
   Vector3 v12 = a.getVelocity().V12(b.getVelocity());
   Vector3 r12 = a.getPosition().V12(b.getPosition());
@@ -31,7 +31,7 @@ void simulation::velocityUpdate(atom a, atom b)
 
 
 
-void simulation::positionUpdate(atom a, float time)
+void simulation::positionUpdate(atom &a, float time)
 {
   Vector3 posNew = a.getPosition() + a.getVelocity() * time;
   a.setPosition(posNew);
@@ -42,20 +42,27 @@ void simulation::positionUpdate(atom a, float time)
 
 void simulation::getCollision()
 {
+  float timeCollision;
   for(int i=0;i<number;i++)
   {
     int indexTag = systemAtoms[i].getMinTimeIndex();
-    float timeCollision = systemAtoms[i].getCollisionTime(indexTag);
-    minColtime[i] = timeCollision;
+    if( indexTag == -1){
+      timeCollision = INF;
+    }
+    else{
+      timeCollision = systemAtoms[i].getCollisionTime(indexTag);
+    }
+    minColtime[i] = T(timeCollision);
     minColtimeIndex[i] = indexTag;
   }
     float time = INF;
     int i = 0;
     while(i < number)
     {
-      if(minColtime[i]>0 && minColtime[i]<time)
+      if(T(minColtime[i])!=simTime && T(minColtime[i])<time && minColtimeIndex[i] != -1)
       {
-        collT = minColtime[i];
+        collT = T(minColtime[i]);
+        time = collT;
         collisionPair[0] = i;
         collisionPair[1] = minColtimeIndex[i];
       }
@@ -67,7 +74,7 @@ void simulation::getCollision()
 void simulation::update()
 {
   float deltaT =  collT-simTime;
-  simTime = collT;
+  simTime = T(collT);
   int pair1 =  collisionPair[0];
   int pair2 = collisionPair[1];
   if (pair1 != -1 and pair2 != -1)
@@ -76,13 +83,15 @@ void simulation::update()
     {
       positionUpdate(systemAtoms[i],deltaT);
 
-      systemAtoms[i].tI = simTime;
+      systemAtoms[i].tI = T(simTime);
       periodicBoundary(systemAtoms[i]);
     }
     velocityUpdate(systemAtoms[pair1],systemAtoms[pair2]);
     CollisionTimeUpdate(systemAtoms[pair1]);
     CollisionTimeUpdate(systemAtoms[pair2]);
     velocityInCM();
+    collisionPair[0] = -1;
+    collisionPair[1] = -1;
   }
   else
   {
@@ -95,7 +104,7 @@ void simulation::update()
 
 }
 //Restricted periodic boundary condition
-void simulation::periodicBoundary(atom A)
+void simulation::periodicBoundary(atom &A)
 {
   A.setPosition(A.getPosition()-A.getPosition().Floor());
 }

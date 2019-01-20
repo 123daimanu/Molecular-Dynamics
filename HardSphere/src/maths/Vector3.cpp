@@ -28,11 +28,11 @@ Vector3 Vector3::operator-(Vector3 v)
 {
   return ((*this)+(v*(-1.0)));
 }
-void Vector3::operator=(const Vector3 &v)
+void Vector3::operator=(const Vector3 v)
 {
-	x = v.x;
-	y = v.y;
-	z = v.z;
+	this->x = v.x;
+	this->y = v.y;
+	this->z = v.z;
 
 }
 

@@ -25,7 +25,7 @@ class Vector3
 	Vector3	operator-(Vector3 v);
 
 	Vector3 operator*(float s);
-	void operator=(const Vector3 &v);
+	void operator=(const Vector3 v);
   float dot(Vector3 A);
 
   float square();

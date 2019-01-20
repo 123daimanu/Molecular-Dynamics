@@ -5,6 +5,8 @@
 #include "initialize.hpp"
 #include "../maths/Vector3.hpp"
 
+#define INF std::numeric_limits<float>::infinity();
+
 void initialize::Initial()
 {
   std::mt19937 g1;
@@ -32,9 +34,8 @@ void initialize::Initial()
               else systemAtoms[i-1].setPosition((coord+Vector3(0.5,0,0.5))*a);
               Vector3 velocity(d1(g1),d2(g2),d3(g3));
               systemAtoms[i-1].setVelocity(velocity);
-              systemAtoms[i-1].setTinit(0);
-              systemAtoms[i-1].tC[i-1] = 0;
-              systemAtoms[i-1].collisionWith[i-1] = false;
+              systemAtoms[i-1].setTinit(0.0);
+
 
               i=i+1;
 
@@ -47,20 +48,19 @@ void initialize::Initial()
 
   }
 
-void initialize::CollisionTimeInitialize(atom A)
+void initialize::CollisionTimeInitialize(atom &A)
 {
   for(int i=0;i<number;i++)
   {
     bool colFlag = collisionFlag(A,systemAtoms[i]);
-    if (colFlag){
+    if (colFlag && i != A.atomTag){
       float coltime = collisionTime(A, systemAtoms[i]);
-      if(coltime > 0){
-        A.tC[i] = coltime;
-        A.collisionWith[i] = true;
-      }
+      A.tC[i] = T(coltime)+A.tI;
+      A.collisionWith[i] = true;
+
     }
     else{
-      A.tC[i] = 0;
+      A.tC[i] = INF;
       A.collisionWith[i] = false;
     }
 
@@ -69,21 +69,24 @@ void initialize::CollisionTimeInitialize(atom A)
 }
 
 
-void initialize::CollisionTimeUpdate(atom A)
+void initialize::CollisionTimeUpdate(atom &A)
 {
   for(int i=0;i<number;i++)
   {
     bool colFlag = collisionFlag(A,systemAtoms[i]);
-    if (colFlag){
-      float coltime = collisionTime(A, systemAtoms[i]);
-      if(coltime > 0){
-        A.tC[i] = coltime + A.tI;
-        A.collisionWith[i] = true;
-      }
+    float coltime = collisionTime(A, systemAtoms[i]);
+    if (colFlag && i != A.atomTag){
+      A.tC[i] = T(coltime) + T(A.tI);
+      systemAtoms[i].tC[A.atomTag] = T(coltime) + T(systemAtoms[i].tI);
+      A.collisionWith[i] = true;
+      systemAtoms[i].collisionWith[A.atomTag] = true;
     }
+
     else{
-      A.tC[i] = A.tI;
+      A.tC[i] = INF;
+      systemAtoms[i].tC[A.atomTag] = INF;
       A.collisionWith[i] = false;
+      systemAtoms[i].collisionWith[A.atomTag] = false;
     }
 
   }

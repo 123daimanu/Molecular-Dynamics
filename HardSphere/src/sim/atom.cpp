@@ -17,30 +17,30 @@ float atom::getTinit()
 
 void atom::setPosition(Vector3 pos1)
 {
-  pos = pos1;
+  this->pos = pos1;
 }
 
 void atom::setVelocity(Vector3 vel1)
 {
-  vel = vel1;
+  this->vel = vel1;
 }
 
 void atom::setTinit(float ti)
 {
-  tI=ti;
+  this->tI=ti;
 }
 
 Vector3 atom::getPosition()
 {
-  return this->pos;
+  return pos;
 }
 Vector3 atom::getVelocity()
 {
-  return this->vel;
+  return vel;
 }
 void atom::setCollisionWith(int index, float time){
-  tC[index] = time;
-  collisionWith[index] = 1;
+  this->tC[index] = time;
+  this->collisionWith[index] = 0;
 }
 
 float atom::getCollisionTime( int index){
@@ -51,11 +51,12 @@ float atom::getCollisionTime( int index){
 
 int atom::getMinTimeIndex(){
   float time = INF;
-  int index = 0;
+  int index = -1;
   int i=0;
   while(i < number)
   {
-    if(tC[i]>0 && tC[i]<time)
+
+    if( tC[i]<time && collisionWith[i] == true )
     {
       time = tC[i];
       index = i;
@@ -68,13 +69,13 @@ int atom::getMinTimeIndex(){
 
 void atom::setnumberOfAtoms(int n)
 {
-  number = n;
-  tC = new float[n];
-  collisionWith = new bool[n];
+  this->number = n;
+  this->tC = new float[n];
+  this->collisionWith = new bool[n];
 
 }
 
 void atom::setAtomTag(int tag)
 {
-  atomTag = tag;
+  this->atomTag = tag;
 }

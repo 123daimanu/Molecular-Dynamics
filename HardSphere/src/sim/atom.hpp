@@ -3,6 +3,7 @@
 
 #include "../maths/Vector3.hpp"
 
+#define T(time) ((time) < 0.0001) ? (0.0) : (time)
 
 class atom{
   public:
