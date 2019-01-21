@@ -1,5 +1,12 @@
 #include<iostream>
+#include<cmath>
+#include <cstdlib>
+
+
 #define T(time) ((time) < 0.0001) ? (0.0) : (time)
+#define pi 3.141592653589793
+
+
 
 #include "../src/sim/initialize.hpp"
 #include "../src/sim/atom.hpp"
@@ -9,12 +16,19 @@
 using namespace std;
 
 
-int main(int argc, char **argv)
+int main(int argc,  char *argv[])
 {
+  if ( argc != 4 )
+  {
+    cerr<<"There must be two inputs: first is no of atoms, second is packing fraction and third is iterations"<<endl;
+    exit(1);
 
-  int number_of_atoms=32;
-  float radius = .1;
-  int iter = 3;
+  }
+  int number_of_atoms = atoi(argv[1]);
+  float eta = atof(argv[2]);
+  float radius = pow((number_of_atoms*pi)/(6*eta),-0.33333);
+  cout<<"Sigma: "<<radius<<endl;
+  int iter = atof(argv[3]);
 
 
   simulation system;
@@ -22,17 +36,17 @@ int main(int argc, char **argv)
   system.Initial();
   for(int i = 0; i<iter ; i++)
   {
+    cout<<i<<"th collision:"<<endl;
     system.getCollision();
-    cout<<"Before: "<<system.systemAtoms[0].getPosition()<<endl;
     system.update();
-    cout<<"After: "<<system.systemAtoms[0].getPosition()<<endl;
-    cout<< system.collT<<endl;
+    cout<< system.collisionPair[0]<<"collides"<<system.collisionPair[1]<<endl;
+    cout<<"+++++++++++++++++++++++"<<endl;
   }
 
 
 
-
-  // float packingFraction =0.2;
+  // int number_of_atoms=3;
+  // float packingFraction =0.01;
   // int number_of_iteration = 2;
   //
   // run hardSphere;

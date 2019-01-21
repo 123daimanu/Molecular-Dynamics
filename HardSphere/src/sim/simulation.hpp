@@ -9,8 +9,6 @@
 class simulation: public initialize
 {
 public:
-  float *minColtime;
-  int *minColtimeIndex;
   float simTime = 0.0;
   int collisionPair[2]={-1,-1};
   float collT = 0.0 ;

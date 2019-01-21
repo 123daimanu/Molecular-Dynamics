@@ -10,10 +10,7 @@
 
 #define INF std::numeric_limits<float>::infinity();
 
-simulation::simulation():initialize(){
-  minColtime = new float[number];
-  minColtimeIndex = new int[number];
-}
+simulation::simulation():initialize(){}
 
 
 
@@ -43,6 +40,8 @@ void simulation::positionUpdate(atom &a, float time)
 void simulation::getCollision()
 {
   float timeCollision;
+  float minT[number];
+  int minTIndex[number];
   for(int i=0;i<number;i++)
   {
     int indexTag = systemAtoms[i].getMinTimeIndex();
@@ -52,19 +51,25 @@ void simulation::getCollision()
     else{
       timeCollision = systemAtoms[i].getCollisionTime(indexTag);
     }
-    minColtime[i] = T(timeCollision);
-    minColtimeIndex[i] = indexTag;
+
+    minT[i] = T(timeCollision);
+    minTIndex[i] = indexTag;
   }
+
     float time = INF;
     int i = 0;
-    while(i < number)
+    while( i < number)
+
     {
-      if(T(minColtime[i])!=simTime && T(minColtime[i])<time && minColtimeIndex[i] != -1)
+
+
+
+      if (T(minT[i])!=simTime && T(minT[i])<time && minTIndex[i] !=-1)
       {
-        collT = T(minColtime[i]);
+        collT = T(minT[i]);
         time = collT;
         collisionPair[0] = i;
-        collisionPair[1] = minColtimeIndex[i];
+        collisionPair[1] = minTIndex[i];
       }
       i++;
     }
