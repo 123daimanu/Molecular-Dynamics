@@ -54,7 +54,6 @@ src/sim/initialize.cpp
 src/sim/atom.cpp
 src/sim/simulation.cpp
 run/md.cpp
-src/sim/run.cpp
 )
 
 

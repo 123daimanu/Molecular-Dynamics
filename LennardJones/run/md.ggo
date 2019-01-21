@@ -1,0 +1,23 @@
+# Input file for gengetopt. This file generates mdCmd.cpp and
+# mdCmd.hpp for parsing command line arguments using getopt and
+# getoptlong.  gengetopt is available from:
+#
+#     http://www.gnu.org/software/gengetopt/gengetopt.html
+#
+# Note that the OpenMD build process automatically sets the version string
+# below.
+
+args "--include-getopt --long-help --show-required --unamed-opts --file-name=mdCMD --c-extension=cpp --header-extension=hpp"
+
+package "md"
+version ""
+
+purpose "Simulates hardsphere"
+
+# Options
+
+#option      "input"       i "Input file name"  optional string
+
+
+option      "number"         n "Number of spheres in simulaiton"
+option      "packingfrac"      p "packing fraction of system"
