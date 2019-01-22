@@ -1,5 +1,5 @@
-# Top level cmake script for HardSphere.
-project(HardSphere CXX)
+# Top level cmake script for LennardJones.
+project(LennardJones CXX)
 cmake_minimum_required(VERSION 2.8.11)
 
 #list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
@@ -49,10 +49,10 @@ SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY
 set (md)
 
 set(SOURCE
-src/maths/Vector3.cpp
-src/sim/initialize.cpp
-src/sim/atom.cpp
-src/sim/simulation.cpp
+maths/Vector3.cpp
+src/initialize.cpp
+src/atom.cpp
+src/simulation.cpp
 run/md.cpp
 )
 

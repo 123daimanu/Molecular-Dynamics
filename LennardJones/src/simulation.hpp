@@ -16,7 +16,7 @@ public:
 
   simulation();
   ~simulation(){};
-  void setParms(int number,float l float r, float ene,float m, float timeinterval, float time );
+  void setParams(int num,float l, float r, float ene, float m,float timeinterval, int Totaltime  );
   void update();
   void periodicBoundary(atom &A);
   void velocityInCM();

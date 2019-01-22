@@ -54,27 +54,27 @@ void initialize::setSystemAtoms()
 
 void initialize::setForce(atom &A)
 {
-  A->force =Vector3(0,0,0);
+  A.force =Vector3(0,0,0);
   for(int i=0;i<number; i++)
   {
-    if (i != A->atomTag)
+    if (i != A.atomTag)
     {
-      Vector3 F_AB = calcForce(A.getPosition(), systemAtoms[i].getPosition());
-      A->force = A->force + F_AB;
+      Vector3 F_AB = calcForce(A.pos, systemAtoms[i].pos);
+      A.force = A.force + F_AB;
     }
   }
 }
 
-Vector3 initialize::calcForce(Vector3 r1, Vector r2)
+Vector3 initialize::calcForce(Vector3 r1, Vector3 r2)
 {
-  r12=r1.V12(r2);
-  r = sqrt(r12.square());
-  Vector3 runit = r12/r;
+  Vector3 r_12=r1.V12(r2);
+  float r = sqrt(r_12.square());
+  Vector3 runit = r_12/r;
   float sigbr = sigma/r;
   float r3 = sigbr*sigbr;
   float r6 = r3*r3;
   float r12 = r6*r6;
-  float forcScalar = 4*(epsilon/r)*(-6*r6+12*r12)
-  return runit*forcScalar
+  float forcScalar = 4*(epsilon/r)*(-6*r6+12*r12);
+  return runit*forcScalar;
 
 }

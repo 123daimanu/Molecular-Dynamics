@@ -11,15 +11,15 @@ class initialize{
     int number;
     atom *systemAtoms;
     float sigma;
-    float energy;
+    float epsilon;
     float mass;
     float length;
 
     initialize(){};
     ~initialize(){};
-    void setSystemAtoms()
-    void setForce(atom &A)
-    Vector3 calcForce(Vector3 r1, Vector r2)
+    void setSystemAtoms();
+    void setForce(atom &A);
+    Vector3 calcForce(Vector3 r1, Vector3 r2);
     void Initial();
 };
 

@@ -19,18 +19,16 @@ void atom::setVelocity(Vector3 vel1)
 
 Vector3 atom::getPosition()
 {
-  return pos;
+  return this->pos;
 }
 Vector3 atom::getVelocity()
 {
-  return vel;
+  return this->vel;
 }
 
 void atom::setnumberOfAtoms(int n)
 {
   this->number = n;
-  this->tC = new float[n];
-  this->collisionWith = new bool[n];
 
 }
 

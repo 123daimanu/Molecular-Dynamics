@@ -12,8 +12,9 @@
 
 simulation::simulation():initialize(){}
 
-void simulaton::setParams(int num,float l, float r, float ene, float m,float timeinterval, int Totaltime  )
+void simulation::setParams(int num,float l, float r, float ene, float m,float timeinterval, int Totaltime  )
 {
+  number = num;
   t = Totaltime;
   dt = timeinterval;
   sigma = r;
@@ -31,15 +32,15 @@ void simulation::update()
   for(int i = 0; i< number ; i++)
   {
 
-    this->systemAtoms[i].vel = this->systemAtoms[i].getVelocity() + ((this->systemAtoms[i].force)/2)*(dt/2));
-    this->systemAtoms[i].pos = this->systemAtoms[i].getPosition() + (this->sysetmAtoms[i].getVelocity())*dt;
+    this->systemAtoms[i].vel = this->systemAtoms[i].vel + ((this->systemAtoms[i].force)/2)*(dt/2);
+    this->systemAtoms[i].pos = this->systemAtoms[i].pos + (this->systemAtoms[i].vel)*dt;
     periodicBoundary(this->systemAtoms[i]);
   }
 
   //doforce
   for(int i = 0; i< number ; i++)
   {
-    this->systemAtoms[i].force = this->setForce(this->systemAtoms[i]);
+    this->setForce(this->systemAtoms[i]);
   }
 
   //move B
@@ -47,28 +48,26 @@ void simulation::update()
   for(int i = 0; i< number ; i++)
   {
 
-    this->systemAtoms[i].vel = this->systemAtoms[i].getVelocity() + ((this->systemAtoms[i].force)/2)*(dt/2));
+    this->systemAtoms[i].vel = this->systemAtoms[i].vel + ((this->systemAtoms[i].force)/2)*(dt/2);
 
   }
 }
 
-void simulaton::runSimulation()
+void simulation::runSimulation()
 {
   Initial();
   while(simtime <= t)
   {
-    update()
-    velocityInCM()
+    update();
+    velocityInCM();
     simtime += dt;
   }
 }
 
-
-}
 //Restricted periodic boundary condition
 void simulation::periodicBoundary(atom &A)
 {
-  A.setPosition(A.getPosition()-A.getPosition().Floor());
+  A.setPosition(A.pos-((A.pos/length).Floor())*length);
 }
 
 
@@ -77,11 +76,12 @@ void simulation::velocityInCM()
   Vector3 vcm(0,0,0);
   for(int i=0;i<number;i++)
   {
-    vcm = vcm + systemAtoms[i].getVelocity()/number;
+    vcm = vcm + this->systemAtoms[i].vel/number;
 
   }
   for(int i=0;i<number;i++)
   {
-    systemAtoms[i].setVelocity(systemAtoms[i].getVelocity()-vcm);
+    this->systemAtoms[i].setVelocity(systemAtoms[i].vel-vcm);
+    cout<<this->systemAtoms[i].pos<<endl;
   }
 }
