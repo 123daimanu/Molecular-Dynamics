@@ -21,5 +21,6 @@ public:
   void periodicBoundary(atom &A);
   void velocityInCM();
   void runSimulation();
+  float orderParameter();
 };
 #endif

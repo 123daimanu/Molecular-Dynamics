@@ -2,6 +2,8 @@
 #include<limits>
 #include<iostream>
 #include <cstdlib>
+#include<cmath>
+#include<fstream>
 
 #include "simulation.hpp"
 #include "initialize.hpp"
@@ -9,18 +11,20 @@
 #include "../maths/Vector3.hpp"
 
 #define INF std::numeric_limits<float>::infinity();
+#define PI 3.141592654
 
 simulation::simulation():initialize(){}
 
 void simulation::setParams(int num,float l, float r, float ene, float m,float timeinterval, int Totaltime  )
 {
   number = num;
-  t = Totaltime;
-  dt = timeinterval;
-  sigma = r;
-  epsilon = ene;
-  mass = m;
-  length = l;
+  t = Totaltime; // in fs
+  dt = timeinterval; // in fs
+  sigma = r;  // in ang
+  epsilon = ene; // in kcal/mol
+  mass = m; // in amu
+  length = l; // in ang
+  systemAtoms = new atom [num];
 
 
 }
@@ -55,12 +59,20 @@ void simulation::update()
 
 void simulation::runSimulation()
 {
+  ofstream outfile;
+  outfile.open("order.dat");
+  outfile<<"## time\t order"<<endl;
   Initial();
   while(simtime <= t)
   {
+    outfile.open("order.dat",std::ios_base::app);
+    velocityInCM();
     update();
     velocityInCM();
+    //writefile
+    outfile<<simtime<<"\t"<<orderParameter()<<endl;
     simtime += dt;
+    outfile.close();
   }
 }
 
@@ -82,6 +94,18 @@ void simulation::velocityInCM()
   for(int i=0;i<number;i++)
   {
     this->systemAtoms[i].setVelocity(systemAtoms[i].vel-vcm);
-    cout<<this->systemAtoms[i].pos<<endl;
+
   }
+}
+
+float simulation::orderParameter()
+{
+  float lx(0),ly(0),lz(0);
+  for(int i = 0; i < number ; i++)
+  {
+    lx = lx + cos(4*PI*(this->systemAtoms[i].pos.x)/latConst);
+    ly = ly + cos(4*PI*(this->systemAtoms[i].pos.y)/latConst);
+    lz = lz + cos(4*PI*(this->systemAtoms[i].pos.z)/latConst);
+  }
+  return((lx+ly+lz)/(3*number));
 }

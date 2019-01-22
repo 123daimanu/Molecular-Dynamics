@@ -12,7 +12,7 @@ args "--include-getopt --long-help --show-required --unamed-opts --file-name=mdC
 package "md"
 version ""
 
-purpose "Simulates hardsphere"
+purpose "Simulates LennardJones"
 
 # Options
 

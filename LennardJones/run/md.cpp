@@ -18,13 +18,13 @@ using namespace std;
 int main(int argc,  char *argv[])
 {
 
-  int number_of_atoms = 4;
-  float radius = 0.3;
-  float epsilon = 1;
-  float timeTotal = 3;
+  int number_of_atoms = 1000;
+  float radius = 3.4;  // in ang
+  float epsilon = 0.24;
+  float timeTotal = 1E4;
   float dt = 1;
-  float length = 10;
-  float mass = 1;
+  float length = 100;
+  float mass = 39.4;
 
 
   simulation system;

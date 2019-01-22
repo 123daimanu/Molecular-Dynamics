@@ -12,11 +12,12 @@ void initialize::Initial()
   std::mt19937 g1;
   std::default_random_engine g2;
   std::ranlux48 g3;
-  std::normal_distribution<float> d1(0,0.1);
-  std::normal_distribution<float> d3(0,0.1);
-  std::normal_distribution<float> d2(0,0.1);
+  std::normal_distribution<float> d1(0,2);
+  std::normal_distribution<float> d3(0,2);
+  std::normal_distribution<float> d2(0,2);
   float noLattice = std::ceil(pow(number,1/3.));
   float a = length/float(noLattice);
+  latConst = a;
   int i = 1;
   while(i<number)
   {
@@ -68,13 +69,14 @@ void initialize::setForce(atom &A)
 Vector3 initialize::calcForce(Vector3 r1, Vector3 r2)
 {
   Vector3 r_12=r1.V12(r2);
+  float energyConvert = 4.184E-4;  //! convertskcal/mol to  amu A^2/fs^2
   float r = sqrt(r_12.square());
   Vector3 runit = r_12/r;
   float sigbr = sigma/r;
   float r3 = sigbr*sigbr;
   float r6 = r3*r3;
   float r12 = r6*r6;
-  float forcScalar = 4*(epsilon/r)*(-6*r6+12*r12);
+  float forcScalar = energyConvert*4*(epsilon/r)*(-6*r6+12*r12);
   return runit*forcScalar;
 
 }

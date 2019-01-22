@@ -14,6 +14,7 @@ class initialize{
     float epsilon;
     float mass;
     float length;
+    float latConst;
 
     initialize(){};
     ~initialize(){};

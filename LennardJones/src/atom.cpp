@@ -28,7 +28,7 @@ Vector3 atom::getVelocity()
 
 void atom::setnumberOfAtoms(int n)
 {
-  this->number = n;
+  number = n;
 
 }
 
