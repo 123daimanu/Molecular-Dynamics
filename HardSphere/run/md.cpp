@@ -8,9 +8,9 @@
 
 
 
-#include "../src/sim/initialize.hpp"
-#include "../src/sim/atom.hpp"
-#include "../src/maths/Vector3.hpp"
+//#include "../src/sim/initialize.hpp"
+//#include "../src/sim/atom.hpp"
+//#include "../src/maths/Vector3.hpp"
 #include "../src/sim/simulation.hpp"
 #include "../src/sim/run.hpp"
 using namespace std;
@@ -39,7 +39,6 @@ int main(int argc,  char *argv[])
     cout<<i<<"th collision:"<<endl;
     system.getCollision();
     system.update();
-    cout<< system.collisionPair[0]<<"collides"<<system.collisionPair[1]<<endl;
     cout<<"+++++++++++++++++++++++"<<endl;
   }
 
