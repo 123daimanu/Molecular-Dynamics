@@ -8,9 +8,9 @@
 
 
 
-#include "../src/initialize.hpp"
-#include "../src/atom.hpp"
-#include "../maths/Vector3.hpp"
+//#include "../src/initialize.hpp"
+//#include "../src/atom.hpp"
+//#include "../maths/Vector3.hpp"
 #include "../src/simulation.hpp"
 using namespace std;
 
@@ -18,12 +18,12 @@ using namespace std;
 int main(int argc,  char *argv[])
 {
 
-  int number_of_atoms = 1000;
+  int number_of_atoms = 100;
   float radius = 3.4;  // in ang
   float epsilon = 0.24;
-  float timeTotal = 1E4;
+  float timeTotal = 1E5;
   float dt = 1;
-  float length = 100;
+  float length = 10000;
   float mass = 39.4;
 
 
