@@ -3,24 +3,39 @@
 
 #include <iostream>
 using namespace std;
-
-
+template<typename T>
 class Vector3
 {
-	public:
-	float x,y,z;
+	private:
+	   T x,y,z;
+
+    public:
 
 
-
-	Vector3(float xcomp=0,float ycomp=0,float zcomp=0):x(xcomp),y(ycomp),z(zcomp){}
+    Vector3():x(static_cast<T>(0)),y(static_cast<T>(0)),z(static_cast<T>(0)){};
+    Vector3(T xcomp,T ycomp,T zcomp):x(xcomp),y(ycomp),z(zcomp){};
 	~Vector3(){};
 
+T X()const
+{
+    return x;
+};
+T Y()const
+{
+    return y;
+};
+T Z()const
+{
+    return z;
+};
+//bool operator==(Vector3& rhs) const;
 
-	float operator*(Vector3 v1);
+/*
+	auto operator*(Vector3 v1);
 
-	Vector3 operator+(Vector3 v);
+    auto operator+(Vector3 v);
 
-	Vector3 operator/(float s);
+	auto operator/(float s);
 
 	Vector3	operator-(Vector3 v);
 
@@ -35,7 +50,7 @@ class Vector3
 
 	Vector3 Floor();
 
-
+*/
 
 
 

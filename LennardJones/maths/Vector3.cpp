@@ -3,6 +3,14 @@
 
 #include"Vector3.hpp"
 
+/*
+bool Vector3::operator==(Vector3 rhs)
+{
+    return ( x==rhs.x && y == rhs.y && z==rhs.z);
+
+}
+
+
 
 float Vector3::operator*(Vector3 v1)
 {
@@ -71,3 +79,4 @@ Vector3 Vector3::Floor()
 {
 	return Vector3(floor(this->x),floor(this->y),floor(this->z));
 }
+*/
