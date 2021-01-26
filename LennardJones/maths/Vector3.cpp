@@ -6,7 +6,7 @@
 
 Vector3 Vector3::operator*(const Vector3& v1)
 {
-	return Vector3{x*v1.X() , y*v1.Y() ,z*v1.Z()};
+	return Vector3(x*v1.X() , y*v1.Y() ,z*v1.Z());
 }
 
 
@@ -35,7 +35,6 @@ Vector3 Vector3::operator/(float s)
 	return Vector3(x/s,y/s,z/s);
 }
 
-/*
 
 
 
@@ -49,14 +48,14 @@ Vector3 Vector3::operator-(Vector3 v)
 
 float Vector3::square()
 {
-	return((*this)*(*this));
+	return((*this).dot(*this));
 
 }
 
 
 float Vector3::dot(Vector3 A)
 {
-  return A.x*this->x + A.y*this->y + A.z*this->z;
+  return A.x*x + A.y*y + A.z*z;
 }
 Vector3 Vector3::V12(Vector3 V2)
 {
@@ -77,4 +76,4 @@ Vector3 Vector3::Floor()
 {
 	return Vector3(floor(this->x),floor(this->y),floor(this->z));
 }
-*/
+

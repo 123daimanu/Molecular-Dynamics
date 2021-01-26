@@ -5,11 +5,10 @@
 using namespace std;
 class Vector3
 {
-	private:
-	   double x,y,z;
 
     public:
 
+	double x,y,z;
 
     Vector3():x(0),y(0),z(0){}
     Vector3(double xcomp, double ycomp,double zcomp):x(xcomp),y(ycomp),z(zcomp){}
@@ -52,16 +51,16 @@ Vector3 operator*(float s);
 
 Vector3 operator/(float s);
 
-//	Vector3	operator-(Vector3 v);
+	Vector3	operator-(Vector3 v);
 
- // float dot(Vector3 A);
+  float dot(Vector3 A);
 
-  //float square();
-//	Vector3 V12(Vector3 V2);
-//	Vector3 unit();
-//	friend ostream & operator <<(ostream &output, const Vector3 &V);
+ float square();
+	Vector3 V12(Vector3 V2);
+	Vector3 unit();
+	friend ostream & operator <<(ostream &output, const Vector3 &V);
 
-//	Vector3 Floor();
+	Vector3 Floor();
 
 
 

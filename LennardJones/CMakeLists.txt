@@ -3,7 +3,7 @@ project(LennardJones CXX)
 cmake_minimum_required(VERSION 2.8.11)
 
 #list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
-
+add_definitions(-std=c++17)
 if (NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")
 endif()

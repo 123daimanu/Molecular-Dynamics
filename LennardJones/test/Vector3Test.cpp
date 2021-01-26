@@ -1,5 +1,5 @@
 #include "gmock/gmock.h"
-
+#include <cmath>
 
 #include "../maths/Vector3.hpp"
 
@@ -61,3 +61,39 @@ TEST_F(VectorTest, CheckVectorDivisionByScalar){
 
 }
 
+TEST_F(VectorTest, CheckVectorSubtraction){
+    Vector3 v0 = v - v ;
+    Vector3 vtest0;
+    bool equals{v0 == vtest0};
+    ASSERT_THAT(equals, Eq(true));
+}
+
+
+
+TEST_F(VectorTest, CheckVectorDot){
+    float dotV = v.dot(v) ;
+    ASSERT_THAT(dotV, Eq(14));
+}
+
+TEST_F(VectorTest, CheckV12){
+    Vector3 v12{v_zero.V12(v)}; 
+    Vector3 v21{v.V12(v_zero)};
+    Vector3 negV{v*(-1)};
+
+    bool v12Equals{v12 == v};
+    bool v21Equals{v21 == negV};
+
+    ASSERT_THAT(v12Equals, Eq(true));
+    ASSERT_THAT(v21Equals, Eq(true));
+}
+
+
+
+TEST_F(VectorTest, CheckUnitDistance){
+    Vector3 v_unit{v.unit()}; 
+    Vector3 vUnitTest{v/sqrt(v.dot(v))};
+    
+    bool vUnitEquals{v_unit == vUnitTest};
+
+    ASSERT_THAT(vUnitEquals, Eq(true));
+}

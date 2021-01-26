@@ -9,10 +9,10 @@
 class simulation: public initialize
 {
 public:
-  float t = 0.0;
-  float simtime = 0.0;
-  float dt = 0.0;
-  int iterations = 0;
+  float t{0.0};
+  float simtime{0.0};
+  float dt{0.0};
+  int iterations{0};
 
   simulation();
   ~simulation(){};
