@@ -11,4 +11,17 @@ jobs:
       with:
         clang-format-version: '11'
         check-path: '.'
-        fallback-style: 'Google' # optional
+        fallback-style: 'Google' # optional 
+    - name: if needed, commit clang-formatter changes
+      if: failure()
+      run: |
+        sudo apt-get install clang-format
+        find . -name "*.cpp" -o -name "*.c" -o -name "*.h" -name "*.hpp" -o -name "*.cu"|xargs clang-format -style=Google -i
+        git config --global user.name 'hb'
+        git config --global user.email 'hbs@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git checkout $GITHUB_HEAD_REF
+        git commit -am "fixup: Format Python code with Black"
+        git push
+        
+  
