@@ -11,6 +11,6 @@ jobs:
       - name: Dependencies
         run: |
           sudo apt-get install clang-format
-          find -name '*.cpp' '*.hpp' | xargs clang-format -style=Goolge -i
+          find -name '*.cpp' '*.hpp' |xargs clang-format -style=Goolge -i
     
     
