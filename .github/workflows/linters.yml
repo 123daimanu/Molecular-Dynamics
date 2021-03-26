@@ -13,4 +13,4 @@ jobs:
         source: '.'
         extensions: 'hpp,cpp'
         clangFormatVersion: 11
-        style: chromium
+        style: Google
