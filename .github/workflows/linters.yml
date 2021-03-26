@@ -6,14 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Run clang-format style check for C/C++ programs.
-      uses: jidicula/clang-format-action@v3.2.0
-      with:
-        clang-format-version: '11'
-        check-path: '.'
-        fallback-style: 'Google' # optional 
     - name: if needed, commit clang-formatter changes
-      if: failure()
       run: |
         sudo apt-get install clang-format
         find . -name "*.cpp" -o -name "*.c" -o -name "*.h" -name "*.hpp" -o -name "*.cu"|xargs clang-format -style=Google -i
