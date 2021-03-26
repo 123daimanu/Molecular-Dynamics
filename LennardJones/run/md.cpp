@@ -1,12 +1,9 @@
-#include<iostream>
-#include<cmath>
+#include <cmath>
 #include <cstdlib>
-
+#include <iostream>
 
 #define T(time) ((time) < 0.0001) ? (0.0) : (time)
 #define pi 3.141592653589793
-
-
 
 //#include "../src/initialize.hpp"
 //#include "../src/atom.hpp"
@@ -14,10 +11,7 @@
 #include "../src/simulation.hpp"
 using namespace std;
 
-
-int main(int argc,  char *argv[])
-{
-
+int main(int argc, char *argv[]) {
   int number_of_atoms = 100;
   float radius = 3.4;  // in ang
   float epsilon = 0.24;
@@ -26,9 +20,9 @@ int main(int argc,  char *argv[])
   float length = 10000;
   float mass = 39.4;
 
-
   simulation system;
-  system.setParams(number_of_atoms,length,radius,epsilon,mass,dt,timeTotal);
+  system.setParams(number_of_atoms, length, radius, epsilon, mass, dt,
+                   timeTotal);
   system.runSimulation();
 
   return 0;
